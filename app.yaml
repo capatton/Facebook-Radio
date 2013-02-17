@@ -10,4 +10,5 @@ handlers:
 - url: /images
   static_dir: images
 - url: /.*
-  script: main.app
+  static_files: index.html
+  upload: index.html
