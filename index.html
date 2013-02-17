@@ -18,12 +18,31 @@
 	      xfbml      : true  // parse XFBML
 	    });
 
+	  	//Added this to check the log-in status upon signing in.  We can use "response" to get their relevant data
+	  	// if they're already logged in.  Otherwise, we can grab that data after the auth.login event gets triggered
+	  	FB.getLoginStatus(function(response){
+		  	//not logged in upon opening the page
+		    if (response.status === 'connected') {
+			    var uid = response.authResponse.userID;
+			    var accessToken = response.authResponse.accessToken;
+			    alert("Connected");
+			} 
+			else if (response.status === 'not_authorized') {
+			    // the user is logged in to Facebook, 
+			    // but has not authenticated your app
+			    alert("Not authorized");
+	        } 
+			else {
+			    // the user isn't logged in to Facebook.
+			    alert("Not logged in")
+			}
+		});
+
 	  	FB.Event.subscribe('auth.login', function(response) {
 	  		alert('the status is ' + response.status);
 	  	});
+	 
 	  };
-
-	  
 
 	  // Load the SDK Asynchronously
 	  (function(d){
@@ -35,6 +54,6 @@
 	  }(document));
 	  </script>
 	  <h1>Facebook Radio!</h1>
-	  <div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="4"></div>
+	  <div class="fb-login-button" data-show-faces="true" data-width="200" data-max-rows="4"></div>
 	</body>
 	</html>
