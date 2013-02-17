@@ -1,10 +1,6 @@
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.api import urlfetch
-from google.appengine.ext.webapp import template
-from django.utils import simplejson as json
+import webapp2
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         
@@ -17,16 +13,16 @@ class MainPage(webapp.RequestHandler):
         
 
 
-application = webapp.WSGIApplication(
+application = webapp2.WSGIApplication(
                                      [('/', MainPage)],
                                      debug=True)
 
 
 
-def main():
-    run_wsgi_app(application)
+#def main():
+ #   run_wsgi_app(application)
 
 
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
