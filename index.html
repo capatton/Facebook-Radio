@@ -3,7 +3,7 @@
 	<link rel='stylesheet' href='/stylesheets/main.css'>
 	<title>Facebook Radio</title>
 </head>
-<body>
+<body onClick="login();">
 	<div id="fb-root"></div>
 	<script>
 	  // Additional JS functions here
@@ -36,12 +36,20 @@
 	function login() {
 		FB.login(function(response) {
 				if (response.authResponse) {
+					testAPI();
 		            // connected
 		        } 
 		        else {
 		            // cancelled
 		        }
 		    });
+	}
+
+	function testAPI() {
+	    console.log('Welcome!  Fetching your information.... ');
+	    FB.api('/me', function(response) {
+	        console.log('Good to see you, ' + response.name + '.');
+	    });
 	}
 	
 
