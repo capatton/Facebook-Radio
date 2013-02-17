@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<link rel='stylesheet' href='/stylesheets/main.css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 	<title>Facebook Radio</title>
 </head>
 <body>
@@ -16,22 +17,22 @@
 	      status     : true, // check login status
 	      cookie     : true, // enable cookies to allow the server to access the session
 	      xfbml      : true  // parse XFBML
-	    });
+	  });
 
 	  	//Added this to check the log-in status upon signing in.  We can use "response" to get their relevant data
 	  	// if they're already logged in.  Otherwise, we can grab that data after the auth.login event gets triggered
 	  	FB.getLoginStatus(function(response){
 		  	//not logged in upon opening the page
-		    if (response.status === 'connected') {
-			    var uid = response.authResponse.userID;
-			    var accessToken = response.authResponse.accessToken;
-			    alert("Connected");
-			} 
-			else if (response.status === 'not_authorized') {
+		  	if (response.status === 'connected') {
+		  		var uid = response.authResponse.userID;
+		  		var accessToken = response.authResponse.accessToken;
+		  		alert("Connected");
+		  	} 
+		  	else if (response.status === 'not_authorized') {
 			    // the user is logged in to Facebook, 
 			    // but has not authenticated your app
 			    alert("Not authorized");
-	        } 
+			} 
 			else {
 			    // the user isn't logged in to Facebook.
 			    alert("Not logged in")
@@ -41,7 +42,7 @@
 	  	FB.Event.subscribe('auth.login', function(response) {
 	  		alert('the status is ' + response.status);
 	  	});
-	 
+	  	
 	  };
 
 	  // Load the SDK Asynchronously
@@ -53,7 +54,10 @@
 	  	ref.parentNode.insertBefore(js, ref);
 	  }(document));
 	  </script>
-	  <h1>Facebook Radio!</h1>
-	  <div class="fb-login-button" data-show-faces="true" data-width="200" data-max-rows="4" size="xlarge"></div>
+	  <h1>Facebook Radio</h1>
+	  <h2>What are your friends listening to?</h2>
+	  <div id="fb_button_container">
+	  	<div class="fb-login-button" data-show-faces="true" data-width="200" data-max-rows="4" size="xlarge">Connect</div>
+	  </div>
 	</body>
 	</html>

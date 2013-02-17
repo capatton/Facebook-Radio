@@ -1,3 +1,19 @@
 body {
 	text-align: center;
+	background-color: #71AAD0;
+	color: #FCFAF7;
+}
+
+h1 {
+	font-family: 'Roboto Condensed', sans-serif;
+	font-size: 40pt;
+	margin-bottom: 0.1em;
+}
+
+h2 {
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+#fb_button_container {
+	/*background-color: #FCFAF7;*/
 }
