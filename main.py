@@ -4,7 +4,7 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         
-        self.output('<h1>BRO</h1>')
+        self.output('<h1>BRO BALLS</h1>')
 
     # Shortcut for writing to webpage
     def output(self, x):
