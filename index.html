@@ -1,9 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<link rel='stylesheet' href='/stylesheets/main.css'>
 	<title>Facebook Radio</title>
 </head>
-<body onClick="login();">
+<body>
 	<div id="fb-root"></div>
 	<script>
 	  // Additional JS functions here
@@ -16,42 +18,12 @@
 	      xfbml      : true  // parse XFBML
 	    });
 
-	  	FB.getLoginStatus(function(response) {
-	  		if (response.status === 'connected') {
-		    // connected
-			} 
-			else if (response.status === 'not_authorized') {
-			    // not_authorized
-			    login();
-			} 
-			else {
-			    // not_logged_in
-			    login();
-			}
-		});
-	    // Additional init code here
+	  	FB.Event.subscribe('auth.login', function(response) {
+	  		alert('the status is ' + response.status);
+	  	});
 	  };
 
-	//Function brings up display for user to log in
-	function login() {
-		FB.login(function(response) {
-				if (response.authResponse) {
-					testAPI();
-		            // connected
-		        } 
-		        else {
-		            // cancelled
-		        }
-		    });
-	}
-
-	function testAPI() {
-	    console.log('Welcome!  Fetching your information.... ');
-	    FB.api('/me', function(response) {
-	        console.log('Good to see you, ' + response.name + '.');
-	    });
-	}
-	
+	  
 
 	  // Load the SDK Asynchronously
 	  (function(d){
@@ -63,5 +35,6 @@
 	  }(document));
 	  </script>
 	  <h1>Facebook Radio!</h1>
+	  <div class="fb-login-button" data-show-faces="false" data-width="200" data-max-rows="4"></div>
 	</body>
 	</html>
