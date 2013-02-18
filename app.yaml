@@ -9,7 +9,7 @@ handlers:
   static_dir: stylesheets
 - url: /images
   static_dir: images
-- url: /player.html
+- url: /player
   static_files: player.html
   upload: player.html
 - url: /.*
