@@ -1,11 +1,10 @@
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<link rel='stylesheet' href='/stylesheets/main.css'>
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
-	<title>Facebook Radio</title>
+	<title>Master</title>
 </head>
 <body>
 	<div id="fb-root"></div>
@@ -18,7 +17,17 @@
 	      status     : true, // check login status
 	      cookie     : true, // enable cookies to allow the server to access the session
 	      xfbml      : true  // parse XFBML
-	  });
+	    });
+
+	  	FB.getLoginStatus(function(response){
+		  	//not logged in upon opening the page
+		  	if (response.status === 'connected') {
+		  		window.location = "player"
+		  	} 
+			else {
+		  		window.location = "login"
+			}
+		});	  	
 	  };
 
 	  // Load the SDK Asynchronously
@@ -30,6 +39,5 @@
 	  	ref.parentNode.insertBefore(js, ref);
 	  }(document));
 	  </script>
-	  <h1>Player Page!</h1>
-</body>
-</html>
+	</body>
+	</html>
