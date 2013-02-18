@@ -12,6 +12,9 @@ handlers:
 - url: /player
   static_files: player.html
   upload: player.html
+- url: /login
+  static_files: login.html
+  upload: login.html
 - url: /.*
-  static_files: index.html
-  upload: index.html
+  static_files: master.html
+  upload: master.html
