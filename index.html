@@ -19,8 +19,6 @@
 	      xfbml      : true  // parse XFBML
 	  });
 
-	  	//NICK: Problem - when you changed the address to localhost, the FB functions no longer work.  The below function never outputs an alert ---
-
 	  	//Added this to check the log-in status upon signing in.  We can use "response" to get their relevant data
 	  	// if they're already logged in.  Otherwise, we can grab that data after the auth.login event gets triggered
 	  	FB.getLoginStatus(function(response){
@@ -28,12 +26,12 @@
 		  	if (response.status === 'connected') {
 		  		var uid = response.authResponse.userID;
 		  		var accessToken = response.authResponse.accessToken;
-		  		alert("Connected");
+		  		window.location="player.html"
 		  	} 
 		  	else if (response.status === 'not_authorized') {
 			    // the user is logged in to Facebook, 
 			    // but has not authenticated your app
-			    alert("Not authorized");
+			    alert("Not authorized");	
 			} 
 			else {
 			    // the user isn't logged in to Facebook.
