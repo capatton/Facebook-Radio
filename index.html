@@ -13,11 +13,13 @@
 	  window.fbAsyncInit = function() {
 	  	FB.init({
 	      appId      : '148310075327662', // App ID
-	      channelUrl : '//www.facebook-radio-practice.appspot.com/channel.html', // Channel File
+	      channelUrl : '//localhost:8080/channel.html', // Channel File
 	      status     : true, // check login status
 	      cookie     : true, // enable cookies to allow the server to access the session
 	      xfbml      : true  // parse XFBML
 	  });
+
+	  	//NICK: Problem - when you changed the address to localhost, the FB functions no longer work.  The below function never outputs an alert ---
 
 	  	//Added this to check the log-in status upon signing in.  We can use "response" to get their relevant data
 	  	// if they're already logged in.  Otherwise, we can grab that data after the auth.login event gets triggered
