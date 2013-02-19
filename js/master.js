@@ -1,5 +1,4 @@
 // Additional JS functions here
-console.log("WTF");
 window.fbAsyncInit = function() {
     FB.init({
           appId      : '148310075327662', // App ID
