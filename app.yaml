@@ -12,8 +12,7 @@ handlers:
 - url: /js
   static_dir: js
 - url: /player
-  static_files: player.html
-  upload: player.html
+  script: player.app
 - url: /login
   static_files: login.html
   upload: login.html
