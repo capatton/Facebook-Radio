@@ -6,9 +6,26 @@ window.fbAsyncInit = function() {
           status     : true, // check login status
           cookie     : true, // enable cookies to allow the server to access the session
           xfbml      : true  // parse XFBML
-        });
-};
+      });
 
+
+  FB.getLoginStatus(function(response){
+    if (response.status === 'connected') {  
+     FB.api('/fql', 'GET', {q:'SELECT uid2 FROM friend WHERE uid1 = me()'}, function(response){
+       if (response && response.data) {
+            for (i = 0; i < response.data.length; ++i) {
+              console.log(response.data[i])
+            }
+       }
+
+
+});
+ } 
+ else {
+     alert("ERROR! User should not be on this screen");
+ }
+});
+};
 
 // Load the SDK Asynchronously
 (function(d){
