@@ -16,6 +16,8 @@ handlers:
 - url: /fblogin
   static_files: fblogin.html
   upload: fblogin.html
+- url: /rdiologin
+  script: rdiologin.app
 - url: /
   script: main.app
 - url: /.*
