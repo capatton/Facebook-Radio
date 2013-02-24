@@ -9,6 +9,7 @@ window.fbAsyncInit = function() {
         });
 };
 
+
 // Load the SDK Asynchronously
 (function(d){
   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
