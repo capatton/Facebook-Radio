@@ -16,7 +16,7 @@ window.fbAsyncInit = function() {
             } 
             else {
                 console.log("NOT CONNECTED");
-                window.location = "login";
+                window.location = "fblogin";
             }
         });       
 };

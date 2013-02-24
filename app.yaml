@@ -13,9 +13,11 @@ handlers:
   static_dir: js
 - url: /player
   script: player.app
-- url: /login
-  static_files: login.html
-  upload: login.html
+- url: /fblogin
+  static_files: fblogin.html
+  upload: fblogin.html
+- url: /
+  script: main.app
 - url: /.*
-  static_files: master.html
-  upload: master.html
+  static_files: error.html
+  upload: error.html
