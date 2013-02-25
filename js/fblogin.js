@@ -9,7 +9,7 @@ window.fbAsyncInit = function() {
         });
   
   FB.Event.subscribe('auth.login', function(response) {
-    window.location="rdiologin"
+    window.location="player"
   });
 };
 

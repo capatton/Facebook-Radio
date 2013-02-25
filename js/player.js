@@ -6,26 +6,35 @@ window.fbAsyncInit = function() {
           status     : true, // check login status
           cookie     : true, // enable cookies to allow the server to access the session
           xfbml      : true  // parse XFBML
-      });
-
+        });
 
   FB.getLoginStatus(function(response){
     if (response.status === 'connected') {  
-     FB.api('/fql', 'GET', {q:'SELECT uid2 FROM friend WHERE uid1 = me()'}, function(response){
-       if (response && response.data) {
-            for (i = 0; i < response.data.length; ++i) {
-              console.log(response.data[i])
-            }
-       }
-
-
+       var getNamesQuery = 'SELECT name, music FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me() LIMIT 100) AND music <>""';
+       //put the music likes into a hash table and grab the most popular (max num of people listed it)
+       
+       FB.api('/fql', 'GET', {q: getNamesQuery}, function(response){
+         if (response && response.data) {
+          document.getElementById("test").innerHTML = "All friends:\n";
+          for (i = 0; i < response.data.length; ++i) {
+            document.getElementById("test").innerHTML += i + ": " + (response.data[i].name) + "</br>";
+          }
+        }
+      });
+      //  FB.api('/fql', 'GET', {q: 'SELECT * FROM like WHERE user_id = me()'}, function(response){
+      //    if (response && response.data) {
+      //     document.getElementById("test").innerHTML += "Likes: \n";
+      //     for (j = 0; j < response.data.length; ++j) {
+      //       document.getElementById("test").innerHTML += (response.data[i]);
+      //     }
+      //   }
+      // });
+   }  
+   else {
+    alert("ERROR! User should not be on this screen");
+  }
 });
- } 
- else {
-     alert("ERROR! User should not be on this screen");
- }
-});
-};
+}; 
 
 // Load the SDK Asynchronously
 (function(d){
