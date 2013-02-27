@@ -11,9 +11,9 @@ handlers:
   static_dir: images
 - url: /js
   static_dir: js
-- url: /player
-  static_files: player.html
-  upload: player.html
+- url: /events
+  static_files: events.html
+  upload: events.html
 - url: /fblogin
   static_files: fblogin.html
   upload: fblogin.html
