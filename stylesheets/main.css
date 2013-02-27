@@ -2,11 +2,13 @@ body {
 	text-align: center;
 	background-color: #71AAD0;
 	color: #FCFAF7;
+	background-image: url(/images/dark_fish_skin.png);
+	background-repeat: repeat;
 }
 
 h1 {
 	font-family: 'Roboto Condensed', sans-serif;
-	font-size: 40pt;
+	font-size: 60pt;
 	margin-bottom: 0.1em;
 }
 
