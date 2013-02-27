@@ -12,12 +12,10 @@ handlers:
 - url: /js
   static_dir: js
 - url: /player
-  script: player.app
+  static_files: player.html
+  upload: player.html
 - url: /fblogin
   static_files: fblogin.html
   upload: fblogin.html
 - url: /
   script: main.app
-- url: /.*
-  static_files: error.html
-  upload: error.html

@@ -1,5 +1,4 @@
 import webapp2
-import oauth
 import os
 from google.appengine.ext.webapp import template
 
