@@ -48,14 +48,6 @@ else {
 };
 
 function getNumMales(event_id) {
-    var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + event_id + ' AND rsvp_status="attending") AND sex="male"';
-    FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
-        if(response && response.data) {
-            zzz=response.data.length;
-            console.log(response.data);
-            return response.data.length;
-        }
-    });
 }
 
 function button0click()
@@ -67,17 +59,14 @@ function button0click()
         if (response && response.data) {
           attending_count = response.data[0].attending_count;
           document.getElementById("eventInfo").innerHTML = "Name: " + response.data[0].name + "</br>Num members: " + attending_count;
-          //var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
-          var numMales = getNumMales(id);
-          var numFemales =  attending_count - numMales;
-          document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales).toFixed(2) + "</br>Percent Female: " + numFemales/(numMales + numFemales);
-         //  FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
-         //    if (response && response.data) {
-         //     var numMales = response.data.length;
-         //     var numFemales =  attending_count - numMales;
-         //     document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales).toFixed(2) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
-         // }
-     //})
+          var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
+          FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
+            if (response && response.data) {
+             var numMales = response.data.length;
+             var numFemales =  attending_count - numMales;
+             document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales).toFixed(2) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
+         }
+     })
       }
   })  
 }
