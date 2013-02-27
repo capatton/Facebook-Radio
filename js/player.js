@@ -1,3 +1,5 @@
+var eventIds = new Array();
+
 // Additional JS functions here
 window.fbAsyncInit = function() {
   FB.init({
@@ -10,17 +12,24 @@ window.fbAsyncInit = function() {
 
   FB.getLoginStatus(function(response){
     if (response.status === 'connected') {  
-       var getNamesQuery = 'SELECT name, music FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me() LIMIT 100) AND music <>""';
-       //put the music likes into a hash table and grab the most popular (max num of people listed it)
+       // var getNamesQuery = 'SELECT name, music FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me() LIMIT 100) AND music <>""';
+       // //put the music likes into a hash table and grab the most popular (max num of people listed it)
        
-       FB.api('/fql', 'GET', {q: getNamesQuery}, function(response){
-         if (response && response.data) {
-          document.getElementById("test").innerHTML = "All friends:\n";
-          for (i = 0; i < response.data.length; ++i) {
-            document.getElementById("test").innerHTML += i + ": " + (response.data[i].name) + "</br>";
-          }
+       
+       //Note: query only works for attending events or not replied events, limited at 4
+       var eventListQuery = 'SELECT eid, rsvp_status FROM event_member WHERE uid = me() AND (rsvp_status="attending" OR rsvp_status="not_replied") AND start_time > now() LIMIT 4';
+       //get event list
+       FB.api('/fql', 'GET', {q: eventListQuery}, function(response) {
+        if (response && response.data) {
+          document.getElementById("eventIds").innerHTML = "Events: " + "</br></br>";
+          for (var i = 0; i < response.data.length; ++i) {
+            document.getElementById("eventIds").innerHTML += "Event id: " + response.data[i].eid + " --- " + "Event status: " + response.data[i].rsvp_status + "</br>";
+            eventIds[i] = response.data[i].eid;
+          } 
         }
-      });
+       });
+
+
       //  FB.api('/fql', 'GET', {q: 'SELECT * FROM like WHERE user_id = me()'}, function(response){
       //    if (response && response.data) {
       //     document.getElementById("test").innerHTML += "Likes: \n";
@@ -33,8 +42,96 @@ window.fbAsyncInit = function() {
    else {
     alert("ERROR! User should not be on this screen");
   }
+
 });
-}; 
+};
+  function getNumMales(event_id) {
+    
+  }
+
+  function button0click()
+  {
+    var id = eventIds[0];
+    var getNameQuery = 'SELECT name, attending_count FROM event WHERE eid=' + id;
+    var attending_count = 0;
+    FB.api('/fql', 'GET', {q: getNameQuery}, function(response) {
+    if (response && response.data) {
+      attending_count = response.data[0].attending_count;
+      document.getElementById("eventInfo").innerHTML = "Name: " + response.data[0].name + "</br>Num members: " + attending_count;
+      var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
+      FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
+        if (response && response.data) {
+           var numMales = response.data.length;
+           var numFemales =  attending_count - numMales;
+           document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales).toFixed(2) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
+        }
+      })
+     }
+    })  
+  }
+  function button1click()
+  {
+      var id = eventIds[1];
+      var getNameQuery = 'SELECT name, attending_count FROM event WHERE eid=' + id;
+      var attending_count = 0;
+      FB.api('/fql', 'GET', {q: getNameQuery}, function(response) {
+      if (response && response.data) {
+        attending_count = response.data[0].attending_count;
+        document.getElementById("eventInfo").innerHTML = "Name: " + response.data[0].name + "</br>Num members: " + attending_count;
+        var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
+        FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
+        if (response && response.data) {
+           var numMales = response.data.length;
+           var numFemales =  attending_count - numMales;
+           document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
+        }
+      })
+     }
+    })  
+
+  }
+  function button2click()
+  {
+      var id = eventIds[2];
+       var getNameQuery = 'SELECT name, attending_count FROM event WHERE eid=' + id;
+      var attending_count = 0;
+      FB.api('/fql', 'GET', {q: getNameQuery}, function(response) {
+      if (response && response.data) {
+        attending_count = response.data[0].attending_count;
+        document.getElementById("eventInfo").innerHTML = "Name: " + response.data[0].name + "</br>Num members: " + attending_count;
+        var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
+        FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
+        if (response && response.data) {
+           var numMales = response.data.length;
+           var numFemales =  attending_count - numMales;
+           document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
+        }
+      })
+     }
+    })  
+
+  }
+  function button3click()
+  {
+      var id = eventIds[3];
+       var getNameQuery = 'SELECT name, attending_count FROM event WHERE eid=' + id;
+      var attending_count = 0;
+      FB.api('/fql', 'GET', {q: getNameQuery}, function(response) {
+      if (response && response.data) {
+        attending_count = response.data[0].attending_count;
+        document.getElementById("eventInfo").innerHTML = "Name: " + response.data[0].name + "</br>Num members: " + attending_count;
+        var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
+        FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
+        if (response && response.data) {
+           var numMales = response.data.length;
+           var numFemales =  attending_count - numMales;
+           document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
+        }
+      })
+     }
+    })  
+  }
+ 
 
 // Load the SDK Asynchronously
 (function(d){
