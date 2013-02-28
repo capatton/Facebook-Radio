@@ -50,9 +50,9 @@ else {
 function getNumMales(event_id) {
 }
 
-function button0click()
+function buttonclick(index)
 {
-    var id = eventIds[0];
+    var id = eventIds[index];
     var getNameQuery = 'SELECT name, attending_count FROM event WHERE eid=' + id;
     var attending_count = 0;
     FB.api('/fql', 'GET', {q: getNameQuery}, function(response) {
@@ -69,68 +69,6 @@ function button0click()
      })
       }
   })  
-}
-function button1click()
-{
-    var id = eventIds[1];
-    var getNameQuery = 'SELECT name, attending_count FROM event WHERE eid=' + id;
-    var attending_count = 0;
-    FB.api('/fql', 'GET', {q: getNameQuery}, function(response) {
-      if (response && response.data) {
-        attending_count = response.data[0].attending_count;
-        document.getElementById("eventInfo").innerHTML = "Name: " + response.data[0].name + "</br>Num members: " + attending_count;
-        var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
-        FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
-            if (response && response.data) {
-             var numMales = response.data.length;
-             var numFemales =  attending_count - numMales;
-             document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
-         }
-     })
-    }
-})  
-
-}
-function button2click()
-{
-    var id = eventIds[2];
-    var getNameQuery = 'SELECT name, attending_count FROM event WHERE eid=' + id;
-    var attending_count = 0;
-    FB.api('/fql', 'GET', {q: getNameQuery}, function(response) {
-      if (response && response.data) {
-        attending_count = response.data[0].attending_count;
-        document.getElementById("eventInfo").innerHTML = "Name: " + response.data[0].name + "</br>Num members: " + attending_count;
-        var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
-        FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
-            if (response && response.data) {
-             var numMales = response.data.length;
-             var numFemales =  attending_count - numMales;
-             document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
-         }
-     })
-    }
-})  
-
-}
-function button3click()
-{
-    var id = eventIds[3];
-    var getNameQuery = 'SELECT name, attending_count FROM event WHERE eid=' + id;
-    var attending_count = 0;
-    FB.api('/fql', 'GET', {q: getNameQuery}, function(response) {
-      if (response && response.data) {
-        attending_count = response.data[0].attending_count;
-        document.getElementById("eventInfo").innerHTML = "Name: " + response.data[0].name + "</br>Num members: " + attending_count;
-        var getMalesQuery = 'SELECT name FROM user WHERE uid in (SELECT uid FROM event_member WHERE eid=' + id + ' AND rsvp_status="attending") AND sex="male"';
-        FB.api('/fql', 'GET', {q: getMalesQuery}, function(response) {
-            if (response && response.data) {
-             var numMales = response.data.length;
-             var numFemales =  attending_count - numMales;
-             document.getElementById("eventInfo").innerHTML += "</br>Males: " + numMales + "</br>Females: " + numFemales + "</br>Percent Male: " + numMales/(numMales + numFemales) + "</br>Percent Female: " + numFemales/(numMales + numFemales); 
-         }
-     })
-    }
-})  
 }
 
 
